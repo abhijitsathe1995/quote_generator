@@ -8,21 +8,19 @@ const loader = document.getElementById('loader');
 
 let apiQuotes = [];
 
-//show loading
-function loading(){
+function showLoadingSpinner(){
     loader.hidden = false;
     quoteContainer.hidden = true;
 }
 
-//hide loading
-function complete(){
+function removeLoadingSpinner(){
     loader.hidden = true;
     quoteContainer.hidden = false;
 }
 
 //show new Quote
 function newQuote(){
-    loading();
+    showLoadingSpinner();
     //pick a random quote from apiQuotes array
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
     
@@ -44,12 +42,12 @@ function newQuote(){
 
     //set Quote and hide Loader
     quoteText.textContent = quote.text;
-    complete();
+    removeLoadingSpinner();
 }
 
 // Get Quotes from API
 async function getQuotes() {
-    loading();
+    showLoadingSpinner();
     const apiUrl = 'https://jacintodesign.github.io/quotes-api/data/quotes.json';
     try {
         const response = await fetch(apiUrl);
